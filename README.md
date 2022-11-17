@@ -22,7 +22,7 @@ dependencies:
 ## Import
 
 ```dart
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_easyloading/minfin_one_id.dart';
 ```
 
 ## How to use

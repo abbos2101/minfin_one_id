@@ -1,14 +1,22 @@
 name: minfin_one_id
 description: OneID orqali autrizatsiya qilish
-version: 3.0.5
-homepage: https://github.com/nslogx/flutter_easyloading
+version: 1.0.0
+homepage: https://github.com/abbos2101/minfin_one_id
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  bloc_concurrency: ^0.2.0
+  dio: ^4.0.6
+  easy_localization: ^3.0.1
+  flutter_bloc: ^8.0.1
+  flutter_easyloading: ^3.0.5
+  freezed: ^2.1.1
+  freezed_annotation: ^2.0.0
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  build_runner: ^2.2.1
+  flutter_lints: ^2.0.0
