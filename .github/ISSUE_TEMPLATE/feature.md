@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest a new idea for Flutter EasyLoading.
+about: Suggest a new idea for Minfin OneID.
 
 ---
 

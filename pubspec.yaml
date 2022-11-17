@@ -3,7 +3,7 @@ description: OneID orqali autrizatsiya qilish
 version: 0.0.1
 homepage: https://github.com/abbos2101/minfin_one_id
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.14.0 <3.0.0"
 
 dependencies:
   flutter:
