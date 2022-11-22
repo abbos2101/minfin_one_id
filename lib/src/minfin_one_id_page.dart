@@ -76,6 +76,7 @@ class _MinfinOneIDPageState extends State<MinfinOneIDPage> {
     return SafeArea(
       bottom: false,
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Column(
           children: [
             progress == 100
@@ -92,6 +93,7 @@ class _MinfinOneIDPageState extends State<MinfinOneIDPage> {
                   : WebView(
                       initialUrl: initialUrl,
                       javascriptMode: JavascriptMode.unrestricted,
+                      backgroundColor: Colors.white,
                       onWebViewCreated: (ctrl) async {
                         controller = ctrl;
                         await controller.clearCache();
