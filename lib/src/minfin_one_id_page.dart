@@ -30,7 +30,7 @@ class MinfinOneIDPage extends StatefulWidget {
 
   static MinfinOneIDPage? _instance;
 
-  static void init({
+  static void ensureInitialized({
     required String clientId,
     required String redirectUri,
     required String clientSecret,
