@@ -56,7 +56,7 @@ class MinfinOneIDPage extends StatefulWidget {
     );
   }
 
-  static MinfinOneIDPage instance([String langCode = ""]) {
+  static MinfinOneIDPage getInstance([String langCode = ""]) {
     if (_instance != null) {
       _instance = MinfinOneIDPage._(
         clientId: _instance!.clientId,
