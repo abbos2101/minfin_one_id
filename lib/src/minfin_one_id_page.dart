@@ -21,7 +21,7 @@ class MinfinOneIDPage extends StatefulWidget {
     required this.clientSecret,
     required this.scope,
     required this.state,
-    this.langCode = "uz",
+    this.langCode = "",
     this.onChangeUrl,
     this.onLoading,
     this.onError,
@@ -36,7 +36,7 @@ class MinfinOneIDPage extends StatefulWidget {
     required String clientSecret,
     required String scope,
     required String state,
-    required String langCode,
+    String langCode = "",
     Function(String url)? onChangeUrl,
     Function()? onLoading,
     Function(dynamic error)? onError,
@@ -56,8 +56,22 @@ class MinfinOneIDPage extends StatefulWidget {
     );
   }
 
-  static MinfinOneIDPage get instance {
-    if (_instance != null) return _instance!;
+  static MinfinOneIDPage instance([String langCode = ""]) {
+    if (_instance != null) {
+      _instance = MinfinOneIDPage._(
+        clientId: _instance!.clientId,
+        redirectUri: _instance!.redirectUri,
+        clientSecret: _instance!.clientSecret,
+        scope: _instance!.scope,
+        state: _instance!.state,
+        langCode: langCode,
+        onChangeUrl: _instance!.onChangeUrl,
+        onLoading: _instance!.onLoading,
+        onError: _instance!.onError,
+        onSuccess: _instance!.onSuccess,
+      );
+      return _instance!;
+    }
     throw "MinfinOneIDPage ensureInitialized qilinmagan";
   }
 
