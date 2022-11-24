@@ -8,6 +8,7 @@ class MinfinOneIDPage extends StatefulWidget {
   final String clientSecret;
   final String scope;
   final String state;
+  final String langCode; //uz, ru, en, kr
   final Function(String url)? onChangeUrl;
   final Function()? onLoading;
   final Function(dynamic error)? onError;
@@ -20,6 +21,7 @@ class MinfinOneIDPage extends StatefulWidget {
     required this.clientSecret,
     required this.scope,
     required this.state,
+    this.langCode = "uz",
     this.onChangeUrl,
     this.onLoading,
     this.onError,
@@ -51,9 +53,17 @@ class _MinfinOneIDPageState extends State<MinfinOneIDPage> {
 
   void changedUrl() async {
     if (currentUrl.contains("http://") || currentUrl.contains("https://")) {
-      const key = "code=";
-      final index = currentUrl.indexOf(key);
-      if (index != -1) {
+      if (currentUrl.contains("https://id.egov.uz/?")) {
+        currentUrl.replaceAll(
+          "https://id.egov.uz/?",
+          "https://id.egov.uz/${widget.langCode}?",
+        );
+        await controller.loadUrl(currentUrl);
+        return;
+      }
+      if (currentUrl.contains("code=")) {
+        const key = "code=";
+        final index = currentUrl.indexOf("code=");
         widget.onLoading?.call();
         final code = currentUrl.substring(
           index + key.length,
