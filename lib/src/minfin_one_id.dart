@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'minfin_api.dart';
 
-class MinfinOneIDPage extends StatefulWidget {
+class MinfinOneID extends StatefulWidget {
   final String clientId;
   final String redirectUri;
   final String clientSecret;
@@ -14,7 +14,7 @@ class MinfinOneIDPage extends StatefulWidget {
   final Function(dynamic error)? onError;
   final Function(dynamic data)? onSuccess;
 
-  const MinfinOneIDPage._({
+  const MinfinOneID._({
     Key? key,
     required this.clientId,
     required this.redirectUri,
@@ -28,7 +28,7 @@ class MinfinOneIDPage extends StatefulWidget {
     this.onSuccess,
   }) : super(key: key);
 
-  static MinfinOneIDPage? _instance;
+  static MinfinOneID? _instance;
 
   static void ensureInitialized({
     required String clientId,
@@ -42,7 +42,7 @@ class MinfinOneIDPage extends StatefulWidget {
     Function(dynamic error)? onError,
     Function(dynamic data)? onSuccess,
   }) {
-    _instance = MinfinOneIDPage._(
+    _instance = MinfinOneID._(
       clientId: clientId,
       redirectUri: redirectUri,
       clientSecret: clientSecret,
@@ -56,9 +56,9 @@ class MinfinOneIDPage extends StatefulWidget {
     );
   }
 
-  static MinfinOneIDPage getInstance([String langCode = ""]) {
+  static MinfinOneID getInstance([String langCode = ""]) {
     if (_instance != null) {
-      _instance = MinfinOneIDPage._(
+      _instance = MinfinOneID._(
         clientId: _instance!.clientId,
         redirectUri: _instance!.redirectUri,
         clientSecret: _instance!.clientSecret,
@@ -76,10 +76,10 @@ class MinfinOneIDPage extends StatefulWidget {
   }
 
   @override
-  State<MinfinOneIDPage> createState() => _MinfinOneIDPageState();
+  State<MinfinOneID> createState() => _MinfinOneIDState();
 }
 
-class _MinfinOneIDPageState extends State<MinfinOneIDPage> {
+class _MinfinOneIDState extends State<MinfinOneID> {
   late final api = MinfinApi(
     clientId: widget.clientId,
     redirectUri: widget.redirectUri,

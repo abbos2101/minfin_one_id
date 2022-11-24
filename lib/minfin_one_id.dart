@@ -6,4 +6,4 @@
 
 library minfin_one_id;
 
-export 'src/minfin_one_id_page.dart';
+export 'src/minfin_one_id.dart';
