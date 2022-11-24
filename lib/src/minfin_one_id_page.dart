@@ -14,7 +14,7 @@ class MinfinOneIDPage extends StatefulWidget {
   final Function(dynamic error)? onError;
   final Function(dynamic data)? onSuccess;
 
-  const MinfinOneIDPage({
+  const MinfinOneIDPage._({
     Key? key,
     required this.clientId,
     required this.redirectUri,
@@ -27,6 +27,39 @@ class MinfinOneIDPage extends StatefulWidget {
     this.onError,
     this.onSuccess,
   }) : super(key: key);
+
+  static MinfinOneIDPage? _instance;
+
+  static void init({
+    required String clientId,
+    required String redirectUri,
+    required String clientSecret,
+    required String scope,
+    required String state,
+    required String langCode,
+    Function(String url)? onChangeUrl,
+    Function()? onLoading,
+    Function(dynamic error)? onError,
+    Function(dynamic data)? onSuccess,
+  }) {
+    _instance = MinfinOneIDPage._(
+      clientId: clientId,
+      redirectUri: redirectUri,
+      clientSecret: clientSecret,
+      scope: scope,
+      state: state,
+      langCode: langCode,
+      onChangeUrl: onChangeUrl,
+      onLoading: onLoading,
+      onError: onError,
+      onSuccess: onSuccess,
+    );
+  }
+
+  static MinfinOneIDPage get instance {
+    if (_instance != null) return _instance!;
+    throw "MinfinOneIDPage ensureInitialized qilinmagan";
+  }
 
   @override
   State<MinfinOneIDPage> createState() => _MinfinOneIDPageState();
@@ -51,14 +84,31 @@ class _MinfinOneIDPageState extends State<MinfinOneIDPage> {
     super.initState();
   }
 
+  String get lang {
+    var lang = widget.langCode;
+    if (widget.langCode == "uz") lang = "oz";
+    if (widget.langCode == "kr") lang = "uz";
+    return lang;
+  }
+
   void changedUrl() async {
     if (currentUrl.contains("http://") || currentUrl.contains("https://")) {
-      if (currentUrl.contains("https://id.egov.uz/?")) {
-        currentUrl.replaceAll(
-          "https://id.egov.uz/?",
-          "https://id.egov.uz/${widget.langCode}?",
-        );
-        await controller.loadUrl(currentUrl);
+      if (currentUrl.contains("://id.egov.uz/")) {
+        if (currentUrl.contains("://id.egov.uz/?")) {
+          await controller.loadUrl(currentUrl.replaceAll(
+            "://id.egov.uz/?",
+            "://id.egov.uz/$lang?",
+          ));
+        } else {
+          if (!currentUrl.contains("://id.egov.uz/$lang?client_id")) {
+            currentUrl = currentUrl
+                .replaceAll("://id.egov.uz/uz?", "://id.egov.uz/$lang?")
+                .replaceAll("://id.egov.uz/oz?", "://id.egov.uz/$lang?")
+                .replaceAll("://id.egov.uz/ru?", "://id.egov.uz/$lang?")
+                .replaceAll("://id.egov.uz/en?", "://id.egov.uz/$lang?");
+            await controller.loadUrl(currentUrl);
+          }
+        }
         return;
       }
       if (currentUrl.contains("code=")) {
